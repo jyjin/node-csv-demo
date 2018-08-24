@@ -45,7 +45,7 @@ var dataArr = _.chunk(data, csvStatic.length)
 
 var i = 0
 console.log(`* 开始保存数据\t\t\t\t\t\t\t${moment().format('YYYY-MM-DD HH:mm:ss')}`)
-async.each(dataArr, (item, cb) => {
+async.eachSeries(dataArr, (item, cb) => {      // 如果有事务 只能用eachSeries同步发送 其他可用each异步执行
     processBar(++i, dataArr.length, `保存进度`)
     saveData(item, cb)
 }, (err, result) => {
